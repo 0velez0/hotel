@@ -1,7 +1,13 @@
 require_relative 'spec_helper'
 
-# TDD pattern:
-#
-# ARRANGE: variables and inputs
-# ACT: Call method we are testing. Perform an action which we want to test
-# ASSERT: Check with an expectation if it gives the desired result
+
+describe "Room class" do
+  describe "initialize" do
+    it "creates a new instance of Room" do
+    new_room_instance = Hotel::Room.new(1)
+    new_room_instance.must_be_instance_of Hotel::Room
+    end
+
+  end # ends describe "initialize"
+
+end # ends describe "Room class"

@@ -1,7 +1,6 @@
 require 'date'
-require 'pry'
-require_relative 'room'
 require_relative 'reservation'
+require_relative 'room'
 
 module Hotel
   class Admin
@@ -14,7 +13,7 @@ module Hotel
         @rooms << Room.new(num)
       end
       @reservations = []
-    end # ends initialize
+    end
 
     def reserve_room(check_in, check_out)
       res_data = {reservation_id: next_res_id, check_in: check_in, check_out: check_out, room: assign_room(check_in,check_out)}
@@ -25,7 +24,7 @@ module Hotel
 
     def reservations_for_a_given_date(date)
       validated_date = validate_date(date)
-      reservation_for_date = @reservations.find_all {|res| (res.check_in...res.check_out).include?(validated_date)} # check_in here is instance variable from reservation, cuz I attr_reader'ed it
+      reservation_for_date = @reservations.find_all {|res| (res.check_in...res.check_out).include?(validated_date)}
       return reservation_for_date
     end
 
@@ -43,25 +42,16 @@ module Hotel
       reservations_for_range = reservations_for_date_range(check_in, check_out)
       unavailable_rooms = reservations_for_range.map {|one_res| one_res.room}
       unavailable_rooms = unavailable_rooms.uniq
-      return unavailable_rooms # <-- array of room that I can't book for the range I set
+      return unavailable_rooms
     end
 
     def available_rooms(check_in, check_out)
       reserved_rooms = unavailable_rooms(check_in, check_out)
       not_reserved_rooms = @rooms.reject {|room| reserved_rooms.include?(room)}
-      return not_reserved_rooms # <-- an array
+      return not_reserved_rooms
     end
 
-    def assign_room(check_in, check_out)
-      if available_rooms(check_in, check_out).length == 0
-        raise ArgumentError.new("There are no rooms available")
-      else
-        # assigns first room available
-        assign_available_room = available_rooms(check_in, check_out).first
-      end
-      return assign_available_room
-    end
-
+    # When adding block booking, add this method 
     # def discount
     #
     # end
@@ -73,7 +63,6 @@ module Hotel
     end
 
     def validate_date(date)
-      # if it's already a date, we don't wanna do anything to it
       if date.class == String
         date = Date.parse(date)
       elsif date.class != Date
@@ -88,6 +77,16 @@ module Hotel
       if check_in_date > check_out_date
         raise ArgumentError.new("The check-out date: #{check_out} is before the check-in date: #{check_in}.")
       end
+    end
+
+    def assign_room(check_in, check_out)
+      if available_rooms(check_in, check_out).length == 0
+        raise ArgumentError.new("Sorry! There are no rooms available!")
+      else
+        # Assigns first room available in the list of room numbers
+        assign_available_room = available_rooms(check_in, check_out).first
+      end
+      return assign_available_room
     end
 
   end # ends admin
