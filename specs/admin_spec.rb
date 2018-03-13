@@ -51,14 +51,13 @@ end # ends describe initialize
     end
 
     it "doesn't add a reservation when there are no available rooms for a given date" do
-      check_in_date = '2018-01-01'
-      check_out_date = '2018-01-06'
+
       instance_of_admin = Hotel::Admin.new
       20.times do
-        instance_of_admin.reserve_room(check_in_date, check_out_date)
+        instance_of_admin.reserve_room('2018-01-01', '2018-01-06')
       end
-      instance_of_admin.reserve_room(check_in_date, check_out_date)
-      proc {instance_of_admin.reserve_room(check_in_date, check_out_date)}.must_raise ArgumentError
+
+      proc {instance_of_admin.reserve_room('2018-01-01', '2018-01-06')}.must_raise ArgumentError
     end
 
     it "assigns a new reservation id" do

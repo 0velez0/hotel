@@ -8,9 +8,14 @@ describe "Reservation class" do
     end
 
     it "checks invalid dates" do
-      res_data = {:reservation_id => 1, :check_in => '2018-01-03', :check_out => '2018-01-01', :room => Hotel::Room.new(3)}
-      new_res = Hotel::Reservation.new(res_data)
-      proc {new_res.validate_stay}.must_raise ArgumentError
+      res_data = {
+        :reservation_id => 1,
+        :check_in => '2018-01-03',
+        :check_out => '2018-01-01',
+        :room => Hotel::Room.new(3)}
+
+      proc {
+        Hotel::Reservation.new(res_data).validate_stay(res_date[:check_in], res_data[:check_out])}.must_raise ArgumentError
     end
 
   end # ends describe "initialize"

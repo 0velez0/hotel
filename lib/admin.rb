@@ -51,7 +51,7 @@ module Hotel
       return not_reserved_rooms
     end
 
-    # When adding block booking, add this method 
+    # When adding block booking, add this method
     # def discount
     #
     # end
