@@ -7,10 +7,13 @@ module Hotel
 
     def initialize(res_data)
       @reservation_id = res_data[:reservation_id]
-      @check_in = Date.parse(res_data[:check_in])
-      @check_out = Date.parse(res_data[:check_out])
       @room = res_data[:room] # <-- an instance of room
+
+      @check_in = Date.parse(res_data[:check_in]) if res_data[:check_in]
+      @check_out = Date.parse(res_data[:check_out]) if res_data[:check_out]
+
       validate_stay(@check_in, @check_out)
+
     end # ends initialize
 
     def duration
