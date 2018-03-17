@@ -28,10 +28,7 @@ module Hotel
     private
 
     def validate_date(date)
-      # if it's already a date, we don't wanna do anything to it
-      if date.class == String
-        date = Date.parse(date)
-      elsif date.class != Date
+      if date.class != Date
         raise ArgumentError.new("Received: #{date}. That entry is not valid.  Please enter date in the form of '2001-02-03' or...")
       end
       return date

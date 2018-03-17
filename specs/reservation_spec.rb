@@ -22,7 +22,6 @@ describe "Reservation class" do
       }.must_raise ArgumentError
     end
 
-    #TODO Do this test. It should check "validate_stay" method. Haven't run 'rake' on this one yet
     it "raises an ArgumentError for nil check_in" do
       res_data = {
         :reservation_id => 1,
@@ -31,9 +30,6 @@ describe "Reservation class" do
         :room => Hotel::Room.new(3)
       }
 
-      # This was what the proc looked like before
-      # proc {
-      #   Hotel::Reservation.new(res_data).validate_stay(res_date[:check_in], res_data[:check_out])}.must_raise ArgumentError
       proc {
         Hotel::Reservation.new(res_data).validate_stay(res_date[:check_in], res_data[:check_out])
       }.must_raise ArgumentError
@@ -46,7 +42,6 @@ describe "Reservation class" do
         :check_out => nil,
         :room => Hotel::Room.new(3)
       }
-
       proc {
         Hotel::Reservation.new(res_data).validate_stay(res_date[:check_in], res_data[:check_out])
       }.must_raise ArgumentError

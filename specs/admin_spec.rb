@@ -51,14 +51,18 @@ end # ends describe initialize
     end
 
     it "doesn't add a reservation when there are no available rooms for a given date" do
-
       instance_of_admin = Hotel::Admin.new
       20.times do
         instance_of_admin.reserve_room('2018-01-01', '2018-01-06')
       end
-
-      proc {instance_of_admin.reserve_room('2018-01-01', '2018-01-06')}.must_raise ArgumentError
+      proc {instance_of_admin.reserve_room('2018-01-01', '2018-01-06')}.must_raise Hotel::UnavailableError
     end
+
+    it "raises an error for a nil check_in date" do
+      instance_of_admin = Hotel::Admin.new
+      proc {instance_of_admin.reserve_room(nil, '2018-01-06')}.must_raise ArgumentError
+    end
+
 
     it "assigns a new reservation id" do
       # get return value and checks its id and checks if it's different than other ids
@@ -84,5 +88,6 @@ end # ends describe initialize
       # set up a scenario when you don't have rooms available: 20 times do???
     end
   end # ends describe "reserve room method"
+
 
 end # ends describe "Admin class"

@@ -1,6 +1,7 @@
 require 'date'
 require_relative 'reservation'
 require_relative 'room'
+require_relative 'unavailable_error'
 
 module Hotel
   class Admin
@@ -21,6 +22,8 @@ module Hotel
       @reservations << new_res
       return new_res
     end
+
+    private
 
     def reservations_for_a_given_date(date)
       validated_date = validate_date(date)
@@ -56,7 +59,6 @@ module Hotel
     #
     # end
 
-    private
 
     def next_res_id
       @reservations.length + 1
@@ -71,17 +73,9 @@ module Hotel
       return date
     end
 
-    def validate_stay(check_in, check_out)
-      check_in_date = validate_date(check_in)
-      check_out_date = validate_date(check_out)
-      if check_in_date > check_out_date
-        raise ArgumentError.new("The check-out date: #{check_out} is before the check-in date: #{check_in}.")
-      end
-    end
-
     def assign_room(check_in, check_out)
       if available_rooms(check_in, check_out).length == 0
-        raise ArgumentError.new("Sorry! There are no rooms available!")
+        raise UnavailableError.new("Sorry! There are no rooms available!")
       else
         # Assigns first room available in the list of room numbers
         assign_available_room = available_rooms(check_in, check_out).first
