@@ -63,9 +63,15 @@ end # ends describe initialize
       proc {instance_of_admin.reserve_room(nil, '2018-01-06')}.must_raise ArgumentError
     end
 
-
     it "assigns a new reservation id" do
       # get return value and checks its id and checks if it's different than other ids
+      check_in_date = '2018-01-01'
+      check_out_date = '2018-01-06'
+      instance_of_admin = Hotel::Admin.new
+      new_res =  instance_of_admin.reserve_room(check_in_date, check_out_date)
+
+      new_res.reservation_id.must_equal 1
+
     end
 
     it "uses checkin and checkout date for reservation" do
