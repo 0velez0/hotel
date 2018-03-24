@@ -1,52 +1,12 @@
 require_relative 'spec_helper'
 
 describe "Reservation class" do
-
   describe "initialize" do
 
     it "creates a new instance of Reservation" do
       res_data = {:reservation_id => 1, :check_in => '2018-01-01', :check_out => '2018-01-03', :room => Hotel::Room.new(3)}
       Hotel::Reservation.new(res_data).must_be_instance_of Hotel::Reservation
     end
-
-    it "raises an error for invalid dates" do
-      res_data = {
-        :reservation_id => 1,
-        :check_in => '2018-01-03',
-        :check_out => '2018-01-01',
-        :room => Hotel::Room.new(3)
-      }
-
-      proc {
-        Hotel::Reservation.new(res_data).validate_stay(res_date[:check_in], res_data[:check_out])
-      }.must_raise ArgumentError
-    end
-
-    it "raises an ArgumentError for nil check_in" do
-      res_data = {
-        :reservation_id => 1,
-        :check_in => nil,
-        :check_out => '2018-01-01',
-        :room => Hotel::Room.new(3)
-      }
-
-      proc {
-        Hotel::Reservation.new(res_data).validate_stay(res_date[:check_in], res_data[:check_out])
-      }.must_raise ArgumentError
-    end
-
-    it "raises an ArgumentError for nil check_out" do
-      res_data = {
-        :reservation_id => 1,
-        :check_in => '2018-01-01',
-        :check_out => nil,
-        :room => Hotel::Room.new(3)
-      }
-      proc {
-        Hotel::Reservation.new(res_data).validate_stay(res_date[:check_in], res_data[:check_out])
-      }.must_raise ArgumentError
-    end
-
   end # ends describe "initialize"
 
   describe "duration method" do

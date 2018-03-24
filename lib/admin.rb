@@ -26,14 +26,14 @@ module Hotel
     private
 
     def reservations_for_a_given_date(date)
-      validated_date = validate_date(date)
+      validated_date = DateHelper.validate_date(date)
       reservation_for_date = @reservations.find_all {|res| (res.check_in...res.check_out).include?(validated_date)}
       return reservation_for_date
     end
 
     def reservations_for_date_range(check_in, check_out)
-      validated_check_in = validate_date(check_in)
-      validated_check_out = validate_date(check_out)
+      validated_check_in = DateHelper.validate_date(check_in)
+      validated_check_out = DateHelper.validate_date(check_out)
       reservations_for_range = []
       (validated_check_in...validated_check_out).each do |one_date|
         reservations_for_range += reservations_for_a_given_date(one_date)
@@ -64,14 +64,14 @@ module Hotel
       @reservations.length + 1
     end
 
-    def validate_date(date)
-      if date.class == String
-        date = Date.parse(date)
-      elsif date.class != Date
-        raise ArgumentError.new("Received: #{date}. That entry is not valid.  Please enter date in the form of '2001-02-03' or...")
-      end
-      return date
-    end
+    # def validate_date(date)
+    #   if date.class == String
+    #     date = Date.parse(date)
+    #   elsif date.class != Date
+    #     raise ArgumentError.new("Received: #{date}. That entry is not valid.  Please enter date in the form of '2001-02-03' or...")
+    #   end
+    #   return date
+    # end
 
     def assign_room(check_in, check_out)
       if available_rooms(check_in, check_out).length == 0

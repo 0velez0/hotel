@@ -69,7 +69,6 @@ end # ends describe initialize
       check_out_date = '2018-01-06'
       instance_of_admin = Hotel::Admin.new
       new_res =  instance_of_admin.reserve_room(check_in_date, check_out_date)
-
       new_res.reservation_id.must_equal 1
 
     end

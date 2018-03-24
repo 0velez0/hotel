@@ -18,6 +18,7 @@ require_relative '../lib/admin'
 require_relative '../lib/reservation'
 require_relative '../lib/room'
 require_relative '../lib/unavailable_error'
+require_relative '../lib/date_helper'
 
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
