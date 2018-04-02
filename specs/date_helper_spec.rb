@@ -7,10 +7,8 @@ describe "DateHelper class" do
       res_data = {
         :reservation_id => 1,
         :check_in => '2018-01-03',
-        :check_out => '2018-01-01',
-        # :room => Hotel::Room.new(3) Not using this any more
+        :check_out => '2018-01-01'
       }
-
       proc {
         Hotel::DateHelper.validate_stay(res_data[:check_in], res_data[:check_out])
       }.must_raise ArgumentError
@@ -23,7 +21,6 @@ describe "DateHelper class" do
         :check_out => '2018-01-01',
         # :room => Hotel::Room.new(3)
       }
-
       proc {
         Hotel::DateHelper.validate_stay(res_data[:check_in], res_data[:check_out])
       }.must_raise ArgumentError
@@ -33,8 +30,7 @@ describe "DateHelper class" do
       res_data = {
         :reservation_id => 1,
         :check_in => '2018-01-01',
-        :check_out => nil,
-        # :room => Hotel::Room.new(3)
+        :check_out => nil
       }
       proc {
         Hotel::DateHelper.validate_stay(res_data[:check_in], res_data[:check_out])

@@ -54,24 +54,9 @@ module Hotel
       return not_reserved_rooms
     end
 
-    # When adding block booking, add this method
-    # def discount
-    #
-    # end
-
-
     def next_res_id
       @reservations.length + 1
     end
-
-    # def validate_date(date)
-    #   if date.class == String
-    #     date = Date.parse(date)
-    #   elsif date.class != Date
-    #     raise ArgumentError.new("Received: #{date}. That entry is not valid.  Please enter date in the form of '2001-02-03' or...")
-    #   end
-    #   return date
-    # end
 
     def assign_room(check_in, check_out)
       if available_rooms(check_in, check_out).length == 0

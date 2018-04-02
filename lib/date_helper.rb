@@ -1,6 +1,5 @@
 require 'date'
 
-
 module Hotel
   class DateHelper
 

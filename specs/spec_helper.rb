@@ -4,7 +4,7 @@ SimpleCov.start do
   add_filter "/specs/"
 end
 
-# in terminal, type this:
+# For Coverage report -- in terminal, type this:
 # open coverage/index.html
 
 require 'minitest'

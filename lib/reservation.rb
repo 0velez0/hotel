@@ -13,7 +13,6 @@ module Hotel
       @check_out = Date.parse(res_data[:check_out]) if res_data[:check_out]
 
       DateHelper.validate_stay(@check_in, @check_out)
-
     end # ends initialize
 
     def duration
@@ -24,23 +23,6 @@ module Hotel
     def total_cost
       @room.price * duration
     end
-
-    private
-
-    # def validate_date(date)
-    #   if date.class != Date
-    #     raise ArgumentError.new("Received: #{date}. That entry is not valid.  Please enter date in the form of '2001-02-03' or...")
-    #   end
-    #   return date
-    # end
-
-    # def validate_stay(check_in, check_out)
-    #   check_in_date = validate_date(check_in)
-    #   check_out_date = validate_date(check_out)
-    #   if check_in_date > check_out_date
-    #     raise ArgumentError.new("The check-out date: #{check_out} is before the check-in date: #{check_in}.")
-    #   end
-    # end
 
   end # ends Reservation
 end # ends module Hotel

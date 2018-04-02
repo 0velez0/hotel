@@ -8,7 +8,6 @@ module Hotel
     attr_reader :room_num
 
     def initialize(room_num)
-      # @status = :AVAILABLE
       @room_num = room_num
       @price = 200.00
     end # ends initialize
